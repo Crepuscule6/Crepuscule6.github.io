@@ -208,6 +208,8 @@ time { color: var(--muted); font-size: .84rem; font-variant-numeric: tabular-num
   gap: 16px;
 }
 
+.card-grid + .card-grid { margin-top: 16px; }
+
 .card {
   display: grid;
   align-content: start;

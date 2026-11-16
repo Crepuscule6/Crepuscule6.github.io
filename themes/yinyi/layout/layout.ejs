@@ -10,7 +10,8 @@
     { path: 'friends/', label: '友链' },
   ];
   let parentSection = '';
-  if (is_archive()) parentSection = 'more/';
+  const morePages = ['status/index.html', 'gallery/index.html', 'devices/index.html'];
+  if (is_archive() || morePages.includes(page.path)) parentSection = 'more/';
   else if (is_post() || is_category() || is_tag()) parentSection = 'blog/';
   const pageTitle = page.title || page.category || page.tag || (page.__index ? 'Blog' : is_archive() ? '文章归档' : '');
 %>
@@ -22,7 +23,7 @@
   <% if (theme.images.logo) { %>
     <link rel="icon" href="<%= url_for(theme.images.logo) %>">
   <% } %>
-  <link rel="stylesheet" href="<%= url_for('css/site.css') %>?v=20261116-pages">
+  <link rel="stylesheet" href="<%= url_for('css/site.css') %>?v=20261116-more">
 </head>
 <body>
   <a class="skip-link" href="#content">跳到内容</a>
