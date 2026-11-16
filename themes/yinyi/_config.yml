@@ -1,7 +1,7 @@
 # 用相对于站点根目录的图片路径替换空值，例如 images/hero.webp。
 images:
-  logo: ''  # IMG-01 · 导航站标
-  hero: ''  # IMG-02 · 首页主图
+  logo: images/site-logo.png  # IMG-01 · 导航站标和标签页图标
+  hero: images/home-portrait.png  # IMG-02 · 首页主图
   about: '' # IMG-03 · 关于页头像
 
 category_descriptions:
