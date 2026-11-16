@@ -8,7 +8,6 @@
   --teal: #297d71;
   --teal-dark: #195c52;
   --terracotta: #9e482d;
-  --ring: #dfb6a4;
   --radius: 8px;
   --shadow: 0 14px 42px rgb(48 41 32 / 8%);
   font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
@@ -112,12 +111,11 @@ a:focus-visible {
 }
 
 .hero h1 {
+  max-inline-size: 3.15em;
   font-size: clamp(3.25rem, 8.7vw, 7rem);
   line-height: 1.06;
   font-weight: 800;
 }
-
-.hero h1 span { display: block; }
 
 .hero-actions {
   display: flex;
@@ -154,22 +152,8 @@ a:focus-visible {
 .button--primary { color: var(--paper); background: var(--teal); border-color: var(--teal); }
 .button--primary:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
 
-.hero-art, .site-image--hero { width: clamp(188px, 28vw, 280px); }
-
-.hero-art {
-  position: relative;
-  isolation: isolate;
-  margin: 14px;
-}
-
-.hero-art::before {
-  content: '';
-  position: absolute;
-  inset: -14px;
-  z-index: -1;
-  border: 1px solid var(--ring);
-  border-radius: 50%;
-}
+.hero-art { width: clamp(228px, 34vw, 380px); }
+.site-image--hero { width: 100%; }
 
 .site-image {
   display: block;

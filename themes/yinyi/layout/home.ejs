@@ -1,9 +1,11 @@
 <section class="hero" aria-labelledby="home-title">
   <div class="hero-copy">
-    <p class="eyebrow">学习 · 生活 · 项目 · 思考</p>
-    <h1 id="home-title"><span><%= config.author %></span><span>的博客</span></h1>
+    <p class="eyebrow"><%= config.subtitle %></p>
+    <h1 id="home-title"><%= config.title %></h1>
     <div class="hero-actions">
       <a class="button button--primary" href="<%= url_for('blog/') %>">读博客</a>
+      <a class="button" href="<%= url_for('blog/projects/') %>">看项目</a>
+      <a class="button" href="<%= url_for('archives/') %>">文章归档</a>
       <a class="button" href="<%= url_for('about/') %>">关于我</a>
     </div>
   </div>

@@ -2,7 +2,9 @@
 <html lang="<%= config.language %>">
 <% const home = page.path === 'index.html'; %>
 <% const about = page.path === 'about/index.html'; %>
-<% const blog = is_post() || is_category() || is_archive() || is_tag() || page.__index; %>
+<% const archives = is_archive(); %>
+<% const projects = page.category === '项目' || (is_post() && page.categories.findOne({ name: '项目' })); %>
+<% const blog = !projects && (is_post() || is_category() || is_tag() || page.__index); %>
 <% const pageTitle = page.title || page.category || page.tag || (page.__index ? '博客' : is_archive() ? '文章归档' : ''); %>
 <head>
   <meta charset="utf-8">
@@ -12,7 +14,7 @@
   <% if (theme.images.logo) { %>
     <link rel="icon" href="<%= url_for(theme.images.logo) %>">
   <% } %>
-  <link rel="stylesheet" href="<%= url_for('css/site.css') %>">
+  <link rel="stylesheet" href="<%= url_for('css/site.css') %>?v=20261116-home">
 </head>
 <body>
   <a class="skip-link" href="#content">跳到内容</a>
@@ -25,6 +27,10 @@
       <a href="<%= url_for('/') %>"<%- home ? ' aria-current="page"' : '' %>>首页</a>
       <span aria-hidden="true">·</span>
       <a href="<%= url_for('blog/') %>"<%- blog ? ' aria-current="' + (page.__index ? 'page' : 'true') + '"' : '' %>>博客</a>
+      <span aria-hidden="true">·</span>
+      <a href="<%= url_for('blog/projects/') %>"<%- projects ? ' aria-current="' + (is_category() ? 'page' : 'true') + '"' : '' %>>项目</a>
+      <span aria-hidden="true">·</span>
+      <a href="<%= url_for('archives/') %>"<%- archives ? ' aria-current="' + (page.path === 'archives/index.html' ? 'page' : 'true') + '"' : '' %>>归档</a>
       <span aria-hidden="true">·</span>
       <a href="<%= url_for('about/') %>"<%- about ? ' aria-current="page"' : '' %>>关于</a>
     </nav>
