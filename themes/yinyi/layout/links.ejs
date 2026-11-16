@@ -1,5 +1,5 @@
-<section class="reading-frame">
-  <header class="reading-heading">
+<section<%- page.wide ? '' : ' class="reading-frame"' %>>
+  <header class="<%= page.wide ? 'section-heading' : 'reading-heading' %>">
     <h1><%= page.title %></h1>
     <% if (page.content.trim()) { %><div class="prose"><%- page.content %></div><% } %>
   </header>
@@ -8,6 +8,7 @@
       <a class="card" href="<%= url_for(link.href) %>">
         <h2><%= link.title %></h2>
         <% if (link.description) { %><p><%= link.description %></p><% } %>
+        <% if (link.action) { %><span class="card-action"><%= link.action %> <span aria-hidden="true">→</span></span><% } %>
       </a>
     <% }); %>
   </div>

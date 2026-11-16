@@ -200,6 +200,7 @@ time { color: var(--muted); font-size: .84rem; font-variant-numeric: tabular-num
 
 .section-heading { margin-block: 24px 30px; }
 .section-heading h1 { font-size: clamp(2.8rem, 7vw, 4.7rem); line-height: 1.14; }
+.section-heading .prose { margin-top: 10px; color: var(--muted); }
 
 .card-grid {
   display: grid;

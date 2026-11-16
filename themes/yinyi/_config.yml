@@ -2,7 +2,7 @@
 images:
   logo: images/site-logo.png  # IMG-01 · 导航站标和标签页图标
   hero: images/home-portrait.png  # IMG-02 · 首页主图
-  about: '' # IMG-03 · 关于页头像
+  about: images/site-logo.png  # IMG-03 · 关于页头像
 
 category_descriptions:
   随笔: 记录值得留下的想法和尝试。
