@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="<%= config.language %>">
+<% const home = page.path === 'index.html'; %>
+<% const about = page.path === 'about/index.html'; %>
+<% const blog = is_post() || is_category() || is_archive() || is_tag() || page.__index; %>
+<% const pageTitle = page.title || page.category || page.tag || (page.__index ? '博客' : is_archive() ? '文章归档' : ''); %>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= config.description %>">
+  <title><%= !home && pageTitle ? `${pageTitle} · ${config.title}` : config.title %></title>
+  <% if (theme.images.logo) { %>
+    <link rel="icon" href="<%= url_for(theme.images.logo) %>">
+  <% } %>
+  <link rel="stylesheet" href="<%= url_for('css/site.css') %>">
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到内容</a>
+  <header class="site-header wrap">
+    <a class="brand" href="<%= url_for('/') %>" aria-label="<%= config.title %>，回到首页">
+      <%- partial('_partial/image', { src: theme.images.logo, number: 'IMG-01', label: '', variant: 'logo' }) %>
+      <span><%= config.title %></span>
+    </a>
+    <nav class="top-nav" aria-label="主要导航">
+      <a href="<%= url_for('/') %>"<%- home ? ' aria-current="page"' : '' %>>首页</a>
+      <span aria-hidden="true">·</span>
+      <a href="<%= url_for('blog/') %>"<%- blog ? ' aria-current="' + (page.__index ? 'page' : 'true') + '"' : '' %>>博客</a>
+      <span aria-hidden="true">·</span>
+      <a href="<%= url_for('about/') %>"<%- about ? ' aria-current="page"' : '' %>>关于</a>
+    </nav>
+  </header>
+  <main class="wrap site-main" id="content" tabindex="-1"><%- body %></main>
+</body>
+</html>

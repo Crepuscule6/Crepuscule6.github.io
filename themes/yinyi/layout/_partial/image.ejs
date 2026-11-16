@@ -1,0 +1,8 @@
+<% if (src) { %>
+  <img class="site-image site-image--<%= variant %>" src="<%= url_for(src) %>" alt="<%= label %>">
+<% } else { %>
+  <div class="site-image site-image--<%= variant %> image-placeholder"<%- label ? ` role="img" aria-label="${label}，占位图 ${number}"` : ' aria-hidden="true"' %>>
+    <span class="image-number"><%= number %></span>
+    <% if (label) { %><span class="image-label"><%= label %></span><% } %>
+  </div>
+<% } %>

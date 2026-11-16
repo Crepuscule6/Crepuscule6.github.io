@@ -1,0 +1,30 @@
+<header class="section-heading">
+  <h1>博客</h1>
+</header>
+<% const categories = site.categories.sort('name').toArray().filter(category => category.length > 0); %>
+<% if (categories.length) { %>
+  <div class="card-grid" aria-label="文章分类">
+    <% categories.forEach(category => { %>
+      <a class="card" href="<%= url_for(category.path) %>">
+        <div class="card-heading">
+          <h2><%= category.name %></h2>
+          <span class="tag"><%= category.length %> 篇</span>
+        </div>
+        <% if (theme.category_descriptions[category.name]) { %>
+          <p><%= theme.category_descriptions[category.name] %></p>
+        <% } %>
+        <span class="card-action">查看分类 <span aria-hidden="true">→</span></span>
+      </a>
+    <% }); %>
+  </div>
+<% } %>
+<% const uncategorized = page.posts.toArray().filter(post => !post.categories.length); %>
+<% if (uncategorized.length) { %>
+  <section class="other-posts" aria-labelledby="other-posts-heading">
+    <h2 id="other-posts-heading">未分类文章</h2>
+    <ul>
+      <% uncategorized.forEach(post => { %><li><a href="<%= url_for(post.path) %>"><%= post.title %></a></li><% }); %>
+    </ul>
+  </section>
+<% } %>
+<% if (!categories.length && !uncategorized.length) { %><p>暂时还没有文章。</p><% } %>

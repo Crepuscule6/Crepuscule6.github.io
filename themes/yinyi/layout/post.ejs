@@ -1,0 +1,18 @@
+<article class="reading-frame">
+  <nav class="breadcrumbs" aria-label="所在位置">
+    <a href="<%= url_for('blog/') %>">博客</a>
+    <% page.categories.forEach(category => { %>
+      <span aria-hidden="true">/</span><a href="<%= url_for(category.path) %>"><%= category.name %></a>
+    <% }); %>
+  </nav>
+  <header class="reading-heading">
+    <h1><%= page.title %></h1>
+    <time datetime="<%= date(page.date, 'YYYY-MM-DD') %>"><%= date(page.date) %></time>
+  </header>
+  <div class="prose"><%- page.content %></div>
+  <% if (page.tags.length) { %>
+    <ul class="tag-list" aria-label="文章标签">
+      <% page.tags.forEach(tag => { %><li><a class="tag" href="<%= url_for(tag.path) %>"><%= tag.name %></a></li><% }); %>
+    </ul>
+  <% } %>
+</article>

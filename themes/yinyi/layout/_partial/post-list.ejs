@@ -1,0 +1,16 @@
+<div class="card-grid">
+  <% page.posts.forEach(post => { %>
+    <% const summary = post.description || strip_html(post.excerpt || post.content || '').replace(/\s+/g, ' ').trim(); %>
+    <a class="card" href="<%= url_for(post.path) %>">
+      <div class="card-heading">
+        <h2><%= post.title %></h2>
+        <time datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date) %></time>
+      </div>
+      <% if (summary) { %><p><%= truncate(summary, { length: 92, omission: '…' }) %></p><% } %>
+      <span class="card-action">阅读文章 <span aria-hidden="true">→</span></span>
+    </a>
+  <% }); %>
+</div>
+<% if (page.total > 1) { %>
+  <nav class="pagination" aria-label="文章列表分页"><%- paginator({ prev_text: '上一页', next_text: '下一页' }) %></nav>
+<% } %>

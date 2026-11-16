@@ -1,5 +1,6 @@
 ---
-title: about
+title: 关于
+layout: about
 date: 2026-09-12 10:34:26
 ---
 # 关于我

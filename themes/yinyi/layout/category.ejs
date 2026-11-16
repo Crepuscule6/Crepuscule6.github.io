@@ -1,0 +1,12 @@
+<section class="reading-frame">
+  <nav class="breadcrumbs" aria-label="所在位置">
+    <a href="<%= url_for('blog/') %>">博客</a><span aria-hidden="true">/</span><span aria-current="page"><%= page.category %></span>
+  </nav>
+  <header class="reading-heading">
+    <h1><%= page.category %></h1>
+    <% if (theme.category_descriptions[page.category]) { %>
+      <p><%= theme.category_descriptions[page.category] %></p>
+    <% } %>
+  </header>
+  <%- partial('_partial/post-list') %>
+</section>
