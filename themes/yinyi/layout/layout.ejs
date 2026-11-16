@@ -1,11 +1,21 @@
 <!doctype html>
 <html lang="<%= config.language %>">
 <% const home = page.path === 'index.html'; %>
-<% const about = page.path === 'about/index.html'; %>
-<% const archives = is_archive(); %>
 <% const projects = page.category === '项目' || (is_post() && page.categories.findOne({ name: '项目' })); %>
-<% const blog = !projects && (is_post() || is_category() || is_tag() || page.__index); %>
-<% const pageTitle = page.title || page.category || page.tag || (page.__index ? '博客' : is_archive() ? '文章归档' : ''); %>
+<%
+  const navigation = [
+    { path: 'about/', label: '关于' },
+    { path: 'blog/', label: 'Blog' },
+    { path: 'services/', label: '服务' },
+    { path: 'more/', label: '更多' },
+    { path: 'friends/', label: '友链' },
+  ];
+  let parentSection = '';
+  if (projects) parentSection = 'services/';
+  else if (is_archive()) parentSection = 'more/';
+  else if (is_post() || is_category() || is_tag()) parentSection = 'blog/';
+  const pageTitle = page.title || page.category || page.tag || (page.__index ? 'Blog' : is_archive() ? '文章归档' : '');
+%>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,15 +34,11 @@
       <span><%= config.title %></span>
     </a>
     <nav class="top-nav" aria-label="主要导航">
-      <a href="<%= url_for('/') %>"<%- home ? ' aria-current="page"' : '' %>>首页</a>
-      <span aria-hidden="true">·</span>
-      <a href="<%= url_for('blog/') %>"<%- blog ? ' aria-current="' + (page.__index ? 'page' : 'true') + '"' : '' %>>博客</a>
-      <span aria-hidden="true">·</span>
-      <a href="<%= url_for('blog/projects/') %>"<%- projects ? ' aria-current="' + (is_category() ? 'page' : 'true') + '"' : '' %>>项目</a>
-      <span aria-hidden="true">·</span>
-      <a href="<%= url_for('archives/') %>"<%- archives ? ' aria-current="' + (page.path === 'archives/index.html' ? 'page' : 'true') + '"' : '' %>>归档</a>
-      <span aria-hidden="true">·</span>
-      <a href="<%= url_for('about/') %>"<%- about ? ' aria-current="page"' : '' %>>关于</a>
+      <% navigation.forEach(({ path, label }, index) => { %>
+        <% const current = page.path === `${path}index.html` ? 'page' : parentSection === path ? 'true' : ''; %>
+        <% if (index > 0) { %><span aria-hidden="true">·</span><% } %>
+        <a href="<%= url_for(path) %>"<%- current ? ` aria-current="${current}"` : '' %>><%= label %></a>
+      <% }); %>
     </nav>
   </header>
   <main class="wrap site-main" id="content" tabindex="-1"><%- body %></main>
