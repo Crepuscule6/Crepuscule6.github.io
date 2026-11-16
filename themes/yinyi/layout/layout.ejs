@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="<%= config.language %>">
 <% const home = page.path === 'index.html'; %>
-<% const projects = page.category === '项目' || (is_post() && page.categories.findOne({ name: '项目' })); %>
 <%
   const navigation = [
     { path: 'about/', label: '关于' },
@@ -11,8 +10,7 @@
     { path: 'friends/', label: '友链' },
   ];
   let parentSection = '';
-  if (projects) parentSection = 'services/';
-  else if (is_archive()) parentSection = 'more/';
+  if (is_archive()) parentSection = 'more/';
   else if (is_post() || is_category() || is_tag()) parentSection = 'blog/';
   const pageTitle = page.title || page.category || page.tag || (page.__index ? 'Blog' : is_archive() ? '文章归档' : '');
 %>
