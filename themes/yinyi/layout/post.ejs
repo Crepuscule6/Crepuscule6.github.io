@@ -1,4 +1,4 @@
-<article class="reading-frame">
+<article class="reading-frame post-reading">
   <nav class="breadcrumbs" aria-label="所在位置">
     <a href="<%= url_for('blog/') %>">博客</a>
     <% page.categories.forEach(category => { %>
@@ -7,9 +7,18 @@
   </nav>
   <header class="reading-heading">
     <h1><%= page.title %></h1>
-    <time datetime="<%= date(page.date, 'YYYY-MM-DD') %>"><%= date(page.date) %></time>
+    <div class="post-meta">
+      <div class="post-meta-details">
+        <time datetime="<%= date(page.date, 'YYYY-MM-DD') %>"><%= date(page.date) %></time>
+        <span class="reading-time">预计阅读 <%= estimated_reading_minutes(page.content) %> 分钟</span>
+      </div>
+      <div class="reading-width-controls" role="group" aria-label="文章显示宽度" hidden>
+        <button type="button" data-reading-width-choice="wide" aria-pressed="true" aria-controls="post-body">宽距</button>
+        <button type="button" data-reading-width-choice="narrow" aria-pressed="false" aria-controls="post-body">窄距</button>
+      </div>
+    </div>
   </header>
-  <div class="prose"><%- page.content %></div>
+  <div class="prose" id="post-body"><%- page.content %></div>
   <% if (page.tags.length) { %>
     <ul class="tag-list" aria-label="文章标签">
       <% page.tags.forEach(tag => { %><li><a class="tag" href="<%= url_for(tag.path) %>"><%= tag.name %></a></li><% }); %>

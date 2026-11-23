@@ -252,6 +252,46 @@ time { color: var(--muted); font-size: .84rem; font-variant-numeric: tabular-num
 .reading-heading h1, .about-page h1 { font-size: clamp(2rem, 4.3vw, 3rem); line-height: 1.22; }
 .reading-heading h1 + * { display: block; margin-top: 10px; }
 
+.post-reading { width: 100%; }
+.post-reading .reading-heading h1 { text-wrap: balance; }
+html[data-reading-width="narrow"] .post-reading { width: min(100%, 780px); }
+html[data-reading-width="narrow"] .post-reading .reading-heading h1 { font-size: clamp(2rem, 3.6vw, 2.5rem); }
+.post-reading .prose { max-width: none; }
+.reading-heading .post-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+.post-meta-details { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 20px; }
+.reading-time { white-space: nowrap; }
+.reading-width-controls {
+  display: inline-flex;
+  flex: none;
+  margin-left: auto;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: rgb(255 255 255 / 65%);
+}
+.reading-width-controls[hidden] { display: none; }
+.reading-width-controls button {
+  min-height: 32px;
+  padding: 4px 14px;
+  border: 0;
+  border-radius: 99px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+}
+.reading-width-controls button:hover { color: var(--teal-dark); }
+.reading-width-controls button[aria-pressed="true"] { background: var(--teal-dark); color: #fff; }
+.reading-width-controls button:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+
 .prose { max-width: 70ch; line-height: 1.9; }
 .prose > :not(:last-child) { margin-bottom: 1em; }
 .prose img { height: auto; border-radius: var(--radius); }
@@ -283,4 +323,9 @@ time { color: var(--muted); font-size: .84rem; font-variant-numeric: tabular-num
 @media (prefers-reduced-motion: reduce) {
   .button, .card { transition: none; }
   .button:hover, .card:hover { transform: none; }
+}
+
+@media print {
+  html[data-reading-width] .post-reading { width: 100%; padding-inline: 0; border: 0; }
+  .reading-width-controls { display: none; }
 }

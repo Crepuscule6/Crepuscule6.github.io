@@ -23,7 +23,10 @@
   <% if (theme.images.logo) { %>
     <link rel="icon" href="<%= url_for(theme.images.logo) %>">
   <% } %>
-  <link rel="stylesheet" href="<%= url_for('css/site.css') %>?v=20261116-more">
+  <% if (is_post()) { %>
+    <script src="<%= url_for('js/reading.js') %>?v=20261123-reading"></script>
+  <% } %>
+  <link rel="stylesheet" href="<%= url_for('css/site.css') %>?v=20261123-reading">
 </head>
 <body>
   <a class="skip-link" href="#content">跳到内容</a>
